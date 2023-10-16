@@ -15,7 +15,7 @@ function App() {
         Our Hot Coffee Shop {coffees?.length}
       </h1>
       <div className="grid md:grid-cols-2 gap-4">
-        {coffees.map((coffee) => (
+        {coffees?.map((coffee) => (
           <CoffeeCard
             key={coffee._id}
             coffee={coffee}

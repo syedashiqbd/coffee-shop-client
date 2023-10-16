@@ -58,7 +58,7 @@ const Users = () => {
         </thead>
         <tbody>
           {/* row 1 */}
-          {users.map((user, index) => (
+          {users?.map((user, index) => (
             <tr key={user._id}>
               <th>{index + 1}</th>
               <td>{user.email}</td>

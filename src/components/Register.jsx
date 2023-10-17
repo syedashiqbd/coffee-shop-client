@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../provider/AuthProvider';
 import Navbar from './Navbar';
 import Swal from 'sweetalert2';
@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const Register = () => {
   const { createUser } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [gender, setGender] = useState(null);
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -14,7 +15,8 @@ const Register = () => {
 
     const email = form.email.value;
     const password = form.password.value;
-    const user = { email, password };
+    const user = { email, password, gender };
+
     console.log(user);
 
     createUser(email, password)
@@ -23,7 +25,7 @@ const Register = () => {
 
         // to insert this user to mongoDB database
         const createdAt = result.user?.metadata?.creationTime;
-        const user = { email, createdAt };
+        const user = { email, createdAt, gender };
         fetch(
           'https://coffee-shop-server-j3034p3ti-syed-ashiqs-projects.vercel.app/user',
           {
@@ -84,9 +86,42 @@ const Register = () => {
                   className="input input-bordered"
                   required
                 />
+              </div>
+              <div className="form-control">
                 <label className="label">
                   <p className="flex items-center">
-                    <input type="checkbox" name="" id="" className="mr-2" />
+                    <input
+                      onChange={() => setGender('Male')}
+                      type="radio"
+                      name="gender"
+                      value="male"
+                      className="mr-2"
+                    />
+                    <span>Male</span>
+                  </p>
+                </label>
+                <label className="label">
+                  <p className="flex items-center">
+                    <input
+                      onChange={() => setGender('Female')}
+                      type="radio"
+                      name="gender"
+                      value="female"
+                      className="mr-2"
+                    />
+                    <span>Female</span>
+                  </p>
+                </label>
+              </div>
+
+              <div className="form-control">
+                <label className="label">
+                  <p className="flex items-center">
+                    <input
+                      type="checkbox"
+                      name="acceptTerms"
+                      className="mr-2"
+                    />
                     <span>Accept our Terms & Conditions</span>
                   </p>
                 </label>

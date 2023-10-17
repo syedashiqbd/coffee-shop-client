@@ -7,7 +7,7 @@ import { AiFillDelete, AiFillEdit, AiOutlineFolderView } from 'react-icons/ai';
 const Users = () => {
   const loadedUsers = useLoaderData();
   const [users, setUsers] = useState(loadedUsers);
-  //   console.log(loadedUsers);
+  console.log(users);
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -52,7 +52,7 @@ const Users = () => {
             <th>SL</th>
             <th>Email</th>
             <th>CreatedAt</th>
-            <th>lastLoggedAt</th>
+            <th>Gender</th>
             <th className="text-center">Action</th>
           </tr>
         </thead>
@@ -63,7 +63,7 @@ const Users = () => {
               <th>{index + 1}</th>
               <td>{user.email}</td>
               <td>{user.createdAt}</td>
-              <td>{user.lastLoggedAt}</td>
+              <td>{user.gender}</td>
 
               <td className=" flex gap-4 flex-wrap justify-end items-center  ">
                 <AiOutlineFolderView className="text-2xl text-purple-500 cursor-pointer"></AiOutlineFolderView>

@@ -1,9 +1,12 @@
 import { useContext } from 'react';
 import Navbar from './Navbar';
 import { AuthContext } from '../provider/AuthProvider';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const { userLogin } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   // to login
   const handleLogin = (e) => {
@@ -37,6 +40,13 @@ const Login = () => {
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
+            Swal.fire({
+              title: 'Success!',
+              text: 'You successfully loggedIn',
+              icon: 'success',
+              confirmButtonText: 'Cool',
+            });
+            navigate('/');
           });
       })
       .catch((err) => console.log(err));

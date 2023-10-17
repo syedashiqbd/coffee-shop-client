@@ -21,7 +21,7 @@ const Users = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(
-          `https://coffee-shop-server-n6v57vd2z-syed-ashiqs-projects.vercel.app/user/${id}`,
+          `https://coffee-shop-server-j3034p3ti-syed-ashiqs-projects.vercel.app/user/${id}`,
           {
             method: 'DELETE',
           }

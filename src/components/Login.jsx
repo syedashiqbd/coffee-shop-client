@@ -28,7 +28,7 @@ const Login = () => {
           lastLoggedAt: result.user?.metadata?.lastSignInTime,
         };
         fetch(
-          'https://coffee-shop-server-n6v57vd2z-syed-ashiqs-projects.vercel.app/user',
+          'https://coffee-shop-server-j3034p3ti-syed-ashiqs-projects.vercel.app/user',
           {
             method: 'PATCH',
             headers: {

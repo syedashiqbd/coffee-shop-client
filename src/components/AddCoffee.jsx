@@ -28,7 +28,7 @@ const AddCoffee = () => {
     console.log(newCoffee);
 
     fetch(
-      'https://coffee-shop-server-n6v57vd2z-syed-ashiqs-projects.vercel.app/coffee',
+      'https://coffee-shop-server-j3034p3ti-syed-ashiqs-projects.vercel.app/coffee',
       {
         method: 'POST',
         headers: {

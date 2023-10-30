@@ -20,10 +20,7 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <App></App>,
-        loader: () =>
-          fetch(
-            'https://coffee-shop-server-j3034p3ti-syed-ashiqs-projects.vercel.app/coffee'
-          ),
+        loader: () => fetch(`${import.meta.env.VITE_APP_SERVER_URL}/coffee`),
       },
       {
         path: '/addCoffee',
@@ -33,9 +30,7 @@ const router = createBrowserRouter([
         path: '/updateCoffee/:id',
         element: <UpdateCoffee></UpdateCoffee>,
         loader: ({ params }) =>
-          fetch(
-            `https://coffee-shop-server-j3034p3ti-syed-ashiqs-projects.vercel.app/coffee/${params.id}`
-          ),
+          fetch(`${import.meta.env.VITE_APP_SERVER_URL}/coffee/${params.id}`),
       },
       {
         path: '/login',
@@ -48,10 +43,7 @@ const router = createBrowserRouter([
       {
         path: '/users',
         element: <Users></Users>,
-        loader: () =>
-          fetch(
-            'https://coffee-shop-server-j3034p3ti-syed-ashiqs-projects.vercel.app/user'
-          ),
+        loader: () => fetch(`${import.meta.env.VITE_APP_SERVER_URL}/user`),
       },
     ],
   },

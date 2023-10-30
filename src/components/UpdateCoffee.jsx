@@ -28,16 +28,13 @@ const UpdateCoffee = () => {
       photo,
     };
 
-    fetch(
-      `https://coffee-shop-server-j3034p3ti-syed-ashiqs-projects.vercel.app/coffee/${_id}`,
-      {
-        method: 'PUT',
-        headers: {
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify(updateCoffee),
-      }
-    )
+    fetch(`${import.meta.env.VITE_APP_SERVER_URL}/coffee/${_id}`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(updateCoffee),
+    })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -54,7 +51,7 @@ const UpdateCoffee = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto lg:py-16 lg:px-28 py-6 px-10 text-center bg-[#F4F3F0]">
+    <div className="max-w-6xl mx-auto lg:py-16 lg:px-28 py-6 px-10 text-center ">
       <h2 className="text-5xl text-[##374151] mb-8">Update Coffee</h2>
       <form onSubmit={handleUpdateCoffee}>
         {/* name and chef */}

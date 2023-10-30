@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Navbar from './Navbar';
+import axios from 'axios';
 
 const AddCoffee = () => {
   const navigate = useNavigate();
@@ -27,20 +28,15 @@ const AddCoffee = () => {
     };
     console.log(newCoffee);
 
-    fetch(
-      'https://coffee-shop-server-j3034p3ti-syed-ashiqs-projects.vercel.app/coffee',
-      {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify(newCoffee),
-      }
-    )
-      .then((res) => res.json())
+    const URL = import.meta.env.VITE_APP_SERVER_URL;
+    console.log(URL);
+
+    // Using Axios
+    axios
+      .post(`${import.meta.env.VITE_APP_SERVER_URL}/coffee`, newCoffee)
       .then((data) => {
-        console.log(data);
-        if (data.insertedId) {
+        console.log(data.data);
+        if (data.data.insertedId) {
           Swal.fire({
             title: 'Success!',
             text: 'Coffee added successfully',
@@ -50,12 +46,37 @@ const AddCoffee = () => {
           navigate('/');
         }
       });
+
+    // Using fetch
+    // fetch(
+    //   `${import.meta.env.VITE_APP_SERVER_URL}/coffee`,
+    //   {
+    //     method: 'POST',
+    //     headers: {
+    //       'content-type': 'application/json',
+    //     },
+    //     body: JSON.stringify(newCoffee),
+    //   }
+    // )
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //     if (data.insertedId) {
+    //       Swal.fire({
+    //         title: 'Success!',
+    //         text: 'Coffee added successfully',
+    //         icon: 'success',
+    //         confirmButtonText: 'Cool',
+    //       });
+    //       navigate('/');
+    //     }
+    //   });
   };
 
   return (
     <div>
       <Navbar></Navbar>
-      <div className="max-w-6xl mx-auto lg:py-16 lg:px-28 py-6 px-10 text-center bg-[#F4F3F0]">
+      <div className="max-w-6xl mx-auto lg:py-16 lg:px-28 py-6 px-10 text-center ">
         <h2 className="text-5xl text-[##374151] mb-8">Add New Coffee</h2>
         <form onSubmit={handleAddCoffee}>
           {/* name and chef */}

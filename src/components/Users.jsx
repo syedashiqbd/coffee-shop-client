@@ -3,6 +3,7 @@ import Navbar from './Navbar';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
 import { AiFillDelete, AiFillEdit, AiOutlineFolderView } from 'react-icons/ai';
+import axios from 'axios';
 
 const Users = () => {
   const loadedUsers = useLoaderData();
@@ -20,21 +21,33 @@ const Users = () => {
       confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(
-          `https://coffee-shop-server-j3034p3ti-syed-ashiqs-projects.vercel.app/user/${id}`,
-          {
-            method: 'DELETE',
-          }
-        )
-          .then((res) => res.json())
+        // Axios using
+        axios
+          .delete(`${import.meta.env.VITE_APP_SERVER_URL}/user/${id}`)
           .then((data) => {
-            console.log(data);
-            if (data.deletedCount > 0) {
+            console.log(data.data);
+            if (data.data.deletedCount > 0) {
               Swal.fire('Deleted!', 'User has been deleted.', 'success');
               const remainingUsers = users.filter((user) => user._id !== id);
               setUsers(remainingUsers);
             }
           });
+        // fetch using
+        // fetch(
+        //   `${import.meta.env.VITE_APP_SERVER_URL}/user/${id}`,
+        //   {
+        //     method: 'DELETE',
+        //   }
+        // )
+        //   .then((res) => res.json())
+        //   .then((data) => {
+        //     console.log(data);
+        //     if (data.deletedCount > 0) {
+        //       Swal.fire('Deleted!', 'User has been deleted.', 'success');
+        //       const remainingUsers = users.filter((user) => user._id !== id);
+        //       setUsers(remainingUsers);
+        //     }
+        //   });
       }
     });
   };

@@ -3,6 +3,7 @@ import { AuthContext } from '../provider/AuthProvider';
 import Navbar from './Navbar';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Register = () => {
   const { createUser } = useContext(AuthContext);
@@ -26,20 +27,12 @@ const Register = () => {
         // to insert this user to mongoDB database
         const createdAt = result.user?.metadata?.creationTime;
         const user = { email, createdAt, gender };
-        fetch(
-          'https://coffee-shop-server-j3034p3ti-syed-ashiqs-projects.vercel.app/user',
-          {
-            method: 'POST',
-            headers: {
-              'content-type': 'application/json',
-            },
-            body: JSON.stringify(user),
-          }
-        )
-          .then((res) => res.json())
+        // Axios use
+        axios
+          .post(`${import.meta.env.VITE_APP_SERVER_URL}/user`, user)
           .then((data) => {
             console.log(data);
-            if (data.insertedId) {
+            if (data.data.insertedId) {
               Swal.fire({
                 title: 'Success!',
                 text: 'User added successfully',
@@ -49,6 +42,32 @@ const Register = () => {
               navigate('/users');
             }
           });
+
+        //fetch use
+
+        // fetch(
+        //   `${import.meta.env.VITE_APP_SERVER_URL}/user`,
+        //   {
+        //     method: 'POST',
+        //     headers: {
+        //       'content-type': 'application/json',
+        //     },
+        //     body: JSON.stringify(user),
+        //   }
+        // )
+        //   .then((res) => res.json())
+        //   .then((data) => {
+        //     console.log(data);
+        //     if (data.insertedId) {
+        //       Swal.fire({
+        //         title: 'Success!',
+        //         text: 'User added successfully',
+        //         icon: 'success',
+        //         confirmButtonText: 'Cool',
+        //       });
+        //       navigate('/users');
+        //     }
+        //   });
       })
       .catch((err) => console.log(err));
   };
@@ -56,7 +75,7 @@ const Register = () => {
   return (
     <div>
       <Navbar></Navbar>
-      <div className="hero min-h-screen bg-base-200">
+      <div className="hero min-h-screen ">
         <div className="hero-content flex-col ">
           <div className="text-center lg:text-left">
             <h1 className="text-5xl font-bold">Register Please!</h1>

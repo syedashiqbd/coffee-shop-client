@@ -1,33 +1,61 @@
-import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
+import { AuthContext } from '../provider/AuthProvider';
+import Swal from 'sweetalert2';
 
 const Navbar = () => {
+  const { user, userSignOut } = useContext(AuthContext);
+
+  const handleSignOut = () => {
+    // to signOut
+    userSignOut()
+      .then((result) => {
+        console.log(result);
+        Swal.fire({
+          title: 'Log Out!',
+          text: 'You successfully log Out',
+          icon: 'success',
+          // confirmButtonText: 'Cool',
+        });
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <div className="flex flex-wrap items-center justify-center gap-4 mt-4">
-      <Link to="/">
-        <button className="btn btn-primary bg-rose-600 border-none text-white ">
+      <NavLink to="/">
+        <button className="btn btn-primary rounded w-36 border-none text-white ">
           Home
         </button>
-      </Link>
-      <Link to="/addCoffee">
-        <button className="btn btn-primary bg-rose-600 border-none text-white ">
+      </NavLink>
+      <NavLink to="/addCoffee">
+        <button className="btn btn-primary rounded w-36 border-none text-white ">
           Add Coffee
         </button>
-      </Link>
-      <Link to="/login">
-        <button className="btn btn-primary bg-rose-600 border-none text-white ">
-          Login
+      </NavLink>
+      {user?.email ? (
+        <button
+          onClick={handleSignOut}
+          className="btn btn-primary rounded w-36 border-none text-white "
+        >
+          Logout
         </button>
-      </Link>
-      <Link to="/register">
-        <button className="btn btn-primary bg-rose-600 border-none text-white ">
+      ) : (
+        <NavLink to="/login">
+          <button className="btn btn-primary rounded w-36 border-none text-white ">
+            Login
+          </button>
+        </NavLink>
+      )}
+      <NavLink to="/register">
+        <button className="btn btn-primary rounded w-36 border-none text-white ">
           Register
         </button>
-      </Link>
-      <Link to="/users">
-        <button className="btn btn-primary bg-rose-600 border-none text-white ">
+      </NavLink>
+      <NavLink to="/users">
+        <button className="btn btn-primary rounded w-36 border-none text-white ">
           User
         </button>
-      </Link>
+      </NavLink>
     </div>
   );
 };

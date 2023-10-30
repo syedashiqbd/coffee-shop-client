@@ -27,16 +27,13 @@ const Login = () => {
           email,
           lastLoggedAt: result.user?.metadata?.lastSignInTime,
         };
-        fetch(
-          'https://coffee-shop-server-j3034p3ti-syed-ashiqs-projects.vercel.app/user',
-          {
-            method: 'PATCH',
-            headers: {
-              'content-type': 'application/json',
-            },
-            body: JSON.stringify(user),
-          }
-        )
+        fetch(`${import.meta.env.VITE_APP_SERVER_URL}/user`, {
+          method: 'PATCH',
+          headers: {
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify(user),
+        })
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
@@ -55,12 +52,12 @@ const Login = () => {
   return (
     <div>
       <Navbar></Navbar>
-      <div className="hero min-h-screen bg-base-200">
+      <div className="hero min-h-screen">
         <div className="hero-content flex-col ">
           <div className="text-center lg:text-left">
-            <h1 className="text-5xl font-bold">Login now!</h1>
+            <h1 className="text-5xl font-bold px-10">Login now!</h1>
           </div>
-          <div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100">
+          <div className="card flex-shrink-0 w-full max-w-2xl shadow-2xl bg-base-100">
             <form onSubmit={handleLogin} className="card-body">
               <div className="form-control">
                 <label className="label">
@@ -92,7 +89,7 @@ const Login = () => {
                 </label>
               </div>
               <div className="form-control mt-6">
-                <button className="btn btn-primary">Login</button>
+                <button className="btn btn-primary">Login</button>{' '}
               </div>
             </form>
           </div>

@@ -6,8 +6,10 @@ import Navbar from './components/Navbar';
 
 function App() {
   const loadedCoffees = useLoaderData();
-  
+
   const [coffees, setCoffees] = useState(loadedCoffees);
+
+
 
   return (
     <div className="max-w-6xl mx-auto">

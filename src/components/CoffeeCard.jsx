@@ -3,7 +3,7 @@
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
+const CoffeeCard = ({ coffee, refetch }) => {
   const { _id, name, quantity, supplier, details, photo } = coffee;
 
   const handleDelete = (_id) => {
@@ -25,10 +25,11 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
             console.log(data);
             if (data.deletedCount > 0) {
               Swal.fire('Deleted!', 'Your coffee has been deleted.', 'success');
-              const remainingCoffee = coffees.filter(
-                (coff) => coff._id !== _id
-              );
-              setCoffees(remainingCoffee);
+              refetch();
+              // const remainingCoffee = coffees.filter(
+              //   (coff) => coff._id !== _id
+              // );
+              // setCoffees(remainingCoffee);
             }
           });
       }

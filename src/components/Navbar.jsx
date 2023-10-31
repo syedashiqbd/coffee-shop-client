@@ -21,42 +21,51 @@ const Navbar = () => {
       .catch((err) => console.log(err));
   };
   return (
-    <div className="flex flex-wrap items-center justify-center gap-4 mt-4">
-      <NavLink to="/">
-        <button className="btn btn-primary rounded w-36 border-none text-white ">
-          Home
-        </button>
-      </NavLink>
-      <NavLink to="/addCoffee">
-        <button className="btn btn-primary rounded w-36 border-none text-white ">
-          Add Coffee
-        </button>
-      </NavLink>
-      {user?.email ? (
-        <button
-          onClick={handleSignOut}
-          className="btn btn-primary rounded w-36 border-none text-white "
-        >
-          Logout
-        </button>
-      ) : (
-        <NavLink to="/login">
+    <>
+      <div>
+        {user && (
+          <p className="text-center text-white bg-black py-2 bg-opacity-90 text-xl">
+            Welcome {user?.email}. Now You Can Watch All the Coffee.
+          </p>
+        )}
+      </div>
+      <div className="flex flex-wrap items-center justify-center gap-4 mt-4">
+        <NavLink to="/">
           <button className="btn btn-primary rounded w-36 border-none text-white ">
-            Login
+            Home
           </button>
         </NavLink>
-      )}
-      <NavLink to="/register">
-        <button className="btn btn-primary rounded w-36 border-none text-white ">
-          Register
-        </button>
-      </NavLink>
-      <NavLink to="/users">
-        <button className="btn btn-primary rounded w-36 border-none text-white ">
-          User
-        </button>
-      </NavLink>
-    </div>
+        <NavLink to="/addCoffee">
+          <button className="btn btn-primary rounded w-36 border-none text-white ">
+            Add Coffee
+          </button>
+        </NavLink>
+        {user?.email ? (
+          <button
+            onClick={handleSignOut}
+            className="btn btn-primary rounded w-36 border-none text-white "
+          >
+            Logout
+          </button>
+        ) : (
+          <NavLink to="/login">
+            <button className="btn btn-primary rounded w-36 border-none text-white ">
+              Login
+            </button>
+          </NavLink>
+        )}
+        <NavLink to="/register">
+          <button className="btn btn-primary rounded w-36 border-none text-white ">
+            Register
+          </button>
+        </NavLink>
+        <NavLink to="/users">
+          <button className="btn btn-primary rounded w-36 border-none text-white ">
+            User
+          </button>
+        </NavLink>
+      </div>
+    </>
   );
 };
 

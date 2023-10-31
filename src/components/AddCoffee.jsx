@@ -9,24 +9,16 @@ const AddCoffee = () => {
   const handleAddCoffee = (e) => {
     e.preventDefault();
     const form = e.target;
-
-    const name = form.name.value;
-    const quantity = form.quantity.value;
-    const supplier = form.supplier.value;
-    const taste = form.taste.value;
-    const category = form.category.value;
-    const details = form.details.value;
-    const photo = form.photo.value;
     const newCoffee = {
-      name,
-      quantity,
-      supplier,
-      taste,
-      category,
-      details,
-      photo,
+      name: form.name.value || 'not-given',
+      quantity: form.quantity.value || 'not-given',
+      supplier: form.supplier.value || 'not-given',
+      taste: form.taste.value || 'not-given',
+      category: form.category.value || 'not-given',
+      details: form.details.value || 'not-given',
+      photo: form.photo.value || 'not-given',
     };
-    console.log(newCoffee);
+  
 
     const URL = import.meta.env.VITE_APP_SERVER_URL;
     console.log(URL);
